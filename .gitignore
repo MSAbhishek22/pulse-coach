@@ -1,0 +1,4 @@
+node_modules/
+.env
+*.log
+demo-video/*.y4m

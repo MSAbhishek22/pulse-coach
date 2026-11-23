@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pulse Coach — your webcam watches your pulse, and helps you settle</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <h1>Pulse Coach</h1>
+    <p class="sub">Your webcam watches your pulse. If it stays high for a bit,
+    the page breathes with you until it settles. Nothing here is a medical
+    reading — it is a rough guide, for general wellness only.</p>
+  </header>
+
+  <!-- State: idle / consent (the "empty" state) -->
+  <section id="state-idle" class="card">
+    <h2>Before the camera starts</h2>
+    <ul class="plain">
+      <li>The camera starts only when you press the button below.</li>
+      <li>Your video is <strong>not recorded</strong> and <strong>not stored</strong> by this app.</li>
+      <li id="consent-presage">With a Presage key on the server, the SmartSpectra SDK
+        does the measuring. The SDK connects to Presage's service to check the key
+        and process the signal — that is how their SDK works.</li>
+      <li id="consent-local">Without a key, your browser makes its own rough estimate
+        from the camera, on this device. Video never leaves the device in that mode.</li>
+      <li>Stop any time with the Stop button, or just close the tab.</li>
+    </ul>
+    <button id="btn-start" class="primary">Start the camera</button>
+    <p class="hint" id="start-note">Checking what this server can do…</p>
+  </section>
+
+  <!-- State: loading -->
+  <section id="state-loading" class="card hidden">
+    <h2>Starting the camera…</h2>
+    <p class="plain-text">If your browser asks for camera permission, that question
+    comes from the browser, not from us. Nothing is measured until you allow it.</p>
+  </section>
+
+  <!-- State: error -->
+  <section id="state-error" class="card hidden">
+    <h2>Something did not work</h2>
+    <p class="plain-text" id="error-text">The camera did not start.</p>
+    <button id="btn-retry" class="primary">Try again</button>
+  </section>
+
+  <!-- State: live (success) -->
+  <section id="state-live" class="hidden">
+    <div class="card live-head">
+      <p class="source-line">Signal: <strong id="source-label">—</strong></p>
+      <div class="numbers">
+        <div class="num-block">
+          <span class="num" id="pulse-num">––</span>
+          <span class="num-label">pulse, beats per minute</span>
+        </div>
+        <div class="num-block">
+          <span class="num" id="breath-num">––</span>
+          <span class="num-label">breathing, breaths per minute</span>
+        </div>
+        <div class="num-block">
+          <span class="num small" id="quality-text">—</span>
+          <span class="num-label">signal quality</span>
+          <div class="qbar"><div id="quality-bar"></div></div>
+        </div>
+      </div>
+      <video id="cam" autoplay playsinline muted class="cam hidden"></video>
+      <canvas id="wave" width="880" height="180" class="wave"></canvas>
+      <p class="plain-text" id="live-note">Sit still, face the light, and give it
+      about ten seconds. The number needs a few heartbeats before it means anything.</p>
+      <p class="plain-text hint-line" id="hint-line"></p>
+      <button id="btn-stop">Stop</button>
+    </div>
+
+    <div id="flag-card" class="card flag hidden">
+      <h2>Your pulse has been up for a bit</h2>
+      <p class="plain-text">That often just means a hard meeting, too much coffee,
+      or a screen that will not wait. Try breathing with the circle for a minute:
+      in as it grows, out as it shrinks.</p>
+      <div class="breath-stage">
+        <div id="breath-circle"><span id="breath-word">breathe in</span></div>
+      </div>
+      <p class="plain-text" id="flag-stats"></p>
+    </div>
+
+    <div id="settled-card" class="card settled hidden">
+      <h2>Settled</h2>
+      <p class="plain-text" id="settled-text">Your pulse came back down.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Built with the Presage SmartSpectra SDK for the Presage SmartSpectra SDK
+    Challenge on DEV. Wellness only — this page does not diagnose or treat
+    anything, and it never watches anyone in secret: the camera runs only
+    after a clear click, on your own screen.</p>
+  </footer>
+</main>
+<script src="signal.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

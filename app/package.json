@@ -1,0 +1,17 @@
+{
+  "name": "pulse-coach",
+  "version": "1.0.0",
+  "description": "Pulse Coach — a webcam pulse check built on the Presage SmartSpectra SDK. It notices when your pulse stays high and breathes with you until it settles.",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node ../tests/test_signal.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@smartspectra/node-sdk": "^3.5.0"
+  },
+  "private": true,
+  "main": "server.js"
+}

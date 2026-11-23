@@ -1,0 +1,90 @@
+/* Pulse Coach — Swiss-minimal layout with soft glass cards.
+   Only transform and opacity are animated. */
+:root {
+  --ink: #1d2a24;
+  --muted: #4c5d53;
+  --paper: #f4f6f2;
+  --card: rgba(255, 255, 255, 0.88);
+  --line: rgba(29, 42, 36, 0.16);
+  --accent: #0e7a4f;
+  --accent-soft: rgba(14, 122, 79, 0.12);
+  --warn: #b3540e;
+  --warn-soft: rgba(179, 84, 14, 0.1);
+  --shadow: 0 1px 2px rgba(29, 42, 36, 0.06), 0 10px 30px rgba(29, 42, 36, 0.09);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(900px 480px at 15% -5%, rgba(14, 122, 79, 0.1), transparent 60%),
+    radial-gradient(700px 420px at 95% 0%, rgba(179, 84, 14, 0.07), transparent 55%),
+    var(--paper);
+  line-height: 1.55;
+}
+.wrap { max-width: 880px; margin: 0 auto; padding: 28px 18px 48px; }
+header h1 { font-size: 2.1rem; margin: 0 0 6px; letter-spacing: -0.02em; }
+.sub { color: var(--muted); max-width: 62ch; margin: 0 0 22px; }
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 24px;
+  margin: 0 0 20px;
+  backdrop-filter: blur(6px);
+}
+.card h2 { margin: 0 0 10px; font-size: 1.25rem; }
+.hidden { display: none !important; }
+ul.plain { margin: 0 0 18px; padding-left: 20px; }
+ul.plain li { margin: 6px 0; }
+.plain-text { margin: 8px 0; }
+.hint, .hint-line { color: var(--muted); font-size: 0.92rem; }
+button {
+  font: inherit;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 10px 20px;
+  min-height: 44px;
+  cursor: pointer;
+}
+button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(14, 122, 79, 0.28);
+}
+button.primary:hover { opacity: 0.92; }
+button:focus-visible { outline: 3px solid rgba(14, 122, 79, 0.45); outline-offset: 2px; }
+.source-line { margin: 0 0 6px; color: var(--muted); font-size: 0.95rem; }
+.numbers { display: flex; flex-wrap: wrap; gap: 18px 34px; align-items: flex-end; margin: 8px 0 14px; }
+.num-block { display: flex; flex-direction: column; min-width: 130px; }
+.num { font-size: 3.4rem; font-weight: 700; line-height: 1; letter-spacing: -0.02em; }
+.num.small { font-size: 1.6rem; padding-bottom: 6px; }
+.num-label { color: var(--muted); font-size: 0.9rem; }
+.qbar { width: 130px; height: 8px; background: rgba(29, 42, 36, 0.1); border-radius: 99px; margin-top: 8px; overflow: hidden; }
+#quality-bar { height: 100%; width: 0%; background: var(--accent); border-radius: 99px; transition: width 0.6s ease; }
+.cam { width: 180px; border-radius: 12px; border: 1px solid var(--line); margin: 4px 0 10px; }
+.wave { width: 100%; height: auto; display: block; background: rgba(255,255,255,0.6); border: 1px solid var(--line); border-radius: 12px; }
+.flag { border-color: rgba(179, 84, 14, 0.4); background: var(--warn-soft); }
+.settled { border-color: rgba(14, 122, 79, 0.4); background: var(--accent-soft); }
+.breath-stage { display: flex; justify-content: center; padding: 18px 0 8px; }
+#breath-circle {
+  width: 150px; height: 150px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, rgba(14,122,79,0.35), rgba(14,122,79,0.65));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 600; text-align: center;
+  transform: scale(0.72);
+}
+footer { color: var(--muted); font-size: 0.92rem; max-width: 68ch; }
+@media (max-width: 560px) {
+  .num { font-size: 2.6rem; }
+  .card { padding: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #quality-bar { transition: none; }
+}
